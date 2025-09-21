@@ -5,12 +5,22 @@ services:
     environment:
       POSTGRES_USER: app
       POSTGRES_PASSWORD: app
-      POSTGRES_DB: googoofy_training
+      POSTGRES_DB: fullstack_training
     ports: ["5432:5432"]
     volumes: [ "db_data:/var/lib/postgresql/data" ]
   adminer:
     image: adminer
     ports: ["8080:8080"]
+
+  backend:
+    build:
+      context: ./backend
+    env_file:
+      - ./backend/.env
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
 
 volumes:
   db_data:
