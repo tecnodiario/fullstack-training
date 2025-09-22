@@ -11,5 +11,5 @@ sqlx::postgres::PgPoolOptions::new()
 .max_connections(10)
 .connect(&url)
 .await
-.expect("cannot connect to db")
+.unwrap_or_else(|e| panic!("cannot connect to db at {}: {}", url, e))
 }

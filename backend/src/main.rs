@@ -16,6 +16,11 @@ tracing::subscriber::set_global_default(subscriber).unwrap();
 
 let pool = db::connect().await;
 
+// Esegui le migrazioni dal backend/migrations
+sqlx::migrate!("./migrations")
+    .run(&pool)
+    .await
+    .expect("cannot run migrations");
 
 let app = routes::app(pool);
 

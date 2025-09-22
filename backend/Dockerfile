@@ -1,5 +1,7 @@
 # ---------- STAGE 1: build ----------
-FROM rust:1.80 AS builder
+FROM rust:latest AS builder
+# (opzionale, ma innocuo)
+RUN rustup update stable
 
 # Imposta la dir di lavoro
 WORKDIR /app
@@ -21,7 +23,7 @@ RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/
 WORKDIR /app
 
 # Copia l'eseguibile dal builder
-COPY --from=builder /app/target/release/googoofy_training_bff /usr/local/bin/fullstack_training_bff
+COPY --from=builder /app/target/release/fullstack_training_bff /usr/local/bin/fullstack_training_bff
 
 # Espone la porta del backend
 EXPOSE 3001
