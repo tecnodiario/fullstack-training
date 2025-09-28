@@ -13,6 +13,8 @@ Costruire una **mini‑app funzionante** per autoformazione con:
 
 ## Architettura & Struttura repo
 
+
+
 ```
 training-app/
 ├─ backend/                    # Axum BFF (Rust)
@@ -64,7 +66,7 @@ services:
     environment:
       POSTGRES_USER: app
       POSTGRES_PASSWORD: app
-      POSTGRES_DB: googoofy_training
+      POSTGRES_DB: fullstack_training
     ports:
       - "5432:5432"
     volumes:
@@ -89,7 +91,7 @@ Avvio: `docker compose up -d`
 
 ```toml
 [package]
-name = "googoofy_training_bff"
+name = "fullstack_training_bff"
 version = "0.1.0"
 edition = "2021"
 
@@ -116,7 +118,7 @@ tower-http = { version = "0.5", features = ["cors", "trace"] }
 **`backend/.env`**
 
 ```
-DATABASE_URL=postgres://app:app@localhost:5432/googoofy_training
+DATABASE_URL=postgres://app:app@localhost:5432/fullstack_training
 RUST_LOG=info,axum::rejection=trace
 PORT=3001
 ```

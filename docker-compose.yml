@@ -22,5 +22,24 @@ services:
     depends_on:
       - db
 
+  web:
+    build:
+      context: ./frontend
+    environment:
+      RUST_API_BASE: http://backend:3001
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+      JWT_COOKIE_NAME: ggf_session
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000"]
+      interval: 10s
+      timeout: 2s
+      retries: 10
+
+      
 volumes:
   db_data:
